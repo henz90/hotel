@@ -11,6 +11,8 @@ YYYY/MM/DD  -   NAME
 3.  Completing aspects of Trello Board
 
 2020/08/27  -   Changmin
-1.  
-2.  
-3.  
+1.  First Scrum
+2.  Complete Trello Board
+    Start Project (Setup & Index)
+3.  Completing aspects of Trello Board
+4.  Create initial project
