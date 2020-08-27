@@ -1,5 +1,16 @@
 ##TEMPLATE##
-YYYY/MM/DD  - NAME
+YYYY/MM/DD  -   NAME
 1.  What I have done / not done since last Scrum?
 2.  What I plan to do from this scrum to next? (next 24 hours)
 3.  Where do I need assistance? What do I need to figure out?
+
+2020/08/27  -   Henry
+1.  First Scrum
+2.  Complete Trello Board
+    Start Project (Setup & Index)
+3.  Completing aspects of Trello Board
+
+2020/08/27  -   Changmin
+1.  
+2.  
+3.  
