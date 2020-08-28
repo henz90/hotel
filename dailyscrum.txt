@@ -16,3 +16,19 @@ YYYY/MM/DD  -   NAME
     Start Project (Setup & Index)
 3.  Completing aspects of Trello Board
 4.  Create initial project
+
+2020/08/28  -   Henry
+1.  Setup Trello Board
+2.  Create SQl DB
+    Create web templates for:   Profile/{id}
+                                ProfileUpdate
+                                Reservation/{id}
+                                ReservationSuccess
+                                ReservationChange/{id}
+                                ErrorInternal
+3.  Learn more about identity and applying it to the webpages
+
+2020/08/28  -   Changmin
+1.  
+2.  
+3.  
