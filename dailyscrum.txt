@@ -18,7 +18,7 @@ YYYY/MM/DD  -   NAME
 4.  Create initial project
 
 2020/08/28  -   Henry
-1.  Setup Trello Board
+1.  Setup Trello Board`
 2.  Create SQl DB
     Create web templates for:   Profile/{id}
                                 ProfileUpdate

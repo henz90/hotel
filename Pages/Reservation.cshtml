@@ -11,7 +11,7 @@
         <div class="left">
             <label for="Checkin"><h2>Check-In Date:</h2></label>
             <div class='input-group date' id='checkin'>
-                     <input type='text' class="form-control" name="Checkin" />
+                     <input type='text' class="form-control" name="Checkin" value="@ViewData["Checkin"]" />
                      <span class="input-group-addon">
                      <span class="glyphicon glyphicon-calendar"></span>
                      </span>
@@ -20,29 +20,29 @@
         <div class="right">
             <label for="Checkout"><h2>Check-Out Date:</h2></label>
             <div class='input-group date' id='checkout'>
-                     <input type='text' class="form-control" name="Checkout"/>
+                     <input type='text' class="form-control" name="Checkout" value="@ViewData["Checkout"]"/>
                      <span class="input-group-addon">
                      <span class="glyphicon glyphicon-calendar"></span>
                      </span>
             </div>
         </div>
         <div class="clear"></div>
+        <br>
         @foreach (var ro in Model.Rooms){
-            <div class="border rounded">
                 <div class="left">
-                        <label for="RoomId">Room: @ro.RoomId</label>
-                        <label>@ro.Type</label>
-                        <label>@ro.View</label>
+                    <input type="radio" id="@ro.RoomId" name="Room" value="@ro.RoomId" class="radio-inline">
+                </div>
+                    <label class="left" for="@ro.RoomId" class="text-left">Room# @ro.RoomId | @ro.Type bed with @ro.View View |
                     @if (ro.Smoking == true){
-                            <label class="alert alert-danger" role="alert"><strong>Smoking</strong></label>
+                        <strong>Smoking</strong>
+                    } else {
+                        <strong>No Smoking</strong>
                     }
-                </div>
-                <div class="right">
-                    <label>$@ro.Price/Night</label>
-                </div>
-            </div>
+                    | at $@ro.Price/Night</label>
+                    <br>
+                <div class="clear"></div>
+            <br>
         }
-        <div class="clear"></div>
         <input type="submit" class="btn btn-primary" value="Make Reservation">
     </form>
 </div>

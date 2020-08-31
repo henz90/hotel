@@ -6,25 +6,42 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using hotel.Data;
 using hotel.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace Hotel.Pages
 {
     public class ReservationModel : PageModel
     {
-        public DateTime GetCheckin(string Checkin){
-            return Convert.ToDateTime(Checkin);
-        }
-        public DateTime GetCheckout(string Checkout){
-            return Convert.ToDateTime(Checkout);
-        }
+        [BindProperty(SupportsGet = true), Required]
+        public DateTime Checkin {get; set;}
+        
+        [BindProperty(SupportsGet = true), Required]
+        public DateTime Checkout {get; set;}
+
+        [BindProperty, Required]
+        public int Room {get; set;}
+
         private readonly DatabaseContext db;  
         public ReservationModel(DatabaseContext db) => this.db = db;
         public List<Room> Rooms { get; set; } = new List<Room>();  
         public List<Reservation> Reservations {get; set;} = new List<Reservation>();
         public void OnGet()
         {
+            ViewData["Checkin"] = Checkin;
+            ViewData["Checkout"] = Checkout;
+            //ViewData["Checkout"] = (Checkout - Checkin) * ;
             Reservations = db.Reservations.ToList();
             Rooms = db.Rooms.ToList();
+        }
+
+        public IActionResult OnPost(){
+            //return RedirectToPage("ReservationSuccess");
+            Reservation reservation = new Reservation();
+            reservation.CheckIn = Checkin;
+            reservation.CheckOut = Checkout;
+            reservation.RoomId = Room;
+            reservation.UserId = "id";  // FIXME:   ???? How do I put user ID in here?
+            return Page();
         }
     }
 }
