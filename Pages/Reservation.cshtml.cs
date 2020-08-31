@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using hotel.Data;
 using hotel.Models;
 using System.ComponentModel.DataAnnotations;
+using HotelProject.Data;
 
 namespace Hotel.Pages
 {
@@ -29,18 +30,21 @@ namespace Hotel.Pages
         {
             ViewData["Checkin"] = Checkin;
             ViewData["Checkout"] = Checkout;
-            //ViewData["Checkout"] = (Checkout - Checkin) * ;
             Reservations = db.Reservations.ToList();
             Rooms = db.Rooms.ToList();
         }
 
         public IActionResult OnPost(){
-            //return RedirectToPage("ReservationSuccess");
-            Reservation reservation = new Reservation();
-            reservation.CheckIn = Checkin;
-            reservation.CheckOut = Checkout;
-            reservation.RoomId = Room;
-            reservation.UserId = "id";  // FIXME:   ???? How do I put user ID in here?
+            if (ModelState.IsValid){
+                Reservation reservation = new Reservation();
+                reservation.CheckIn = Checkin;
+                reservation.CheckOut = Checkout;
+                reservation.RoomId = Room;
+                reservation.UserId = User.Identity.Name;
+                db.Add(reservation);
+                db.SaveChanges();
+                return RedirectToPage("ReservationSuccess");    
+            }
             return Page();
         }
     }
