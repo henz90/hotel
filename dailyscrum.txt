@@ -32,3 +32,8 @@ YYYY/MM/DD  -   NAME
 1.  
 2.  
 3.  
+
+2020/08/31  -   Henry
+1.  Completed Index Page
+2.  Complete Reservation Page
+3.  Issues passing Parameters

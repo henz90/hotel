@@ -3,3 +3,46 @@
 @{
     ViewData["Title"] = "Reservation";
 }
+
+<div class="text-center">
+    <img src="/images/hotel.jpg" class="rounded img-fluid">
+    <h1 class="display-4">Book your room today!</h1>
+    <form method="post">
+        <div class="left">
+            <label for="Checkin"><h2>Check-In Date:</h2></label>
+            <div class='input-group date' id='checkin'>
+                     <input type='text' class="form-control" name="Checkin" />
+                     <span class="input-group-addon">
+                     <span class="glyphicon glyphicon-calendar"></span>
+                     </span>
+            </div>
+        </div>
+        <div class="right">
+            <label for="Checkout"><h2>Check-Out Date:</h2></label>
+            <div class='input-group date' id='checkout'>
+                     <input type='text' class="form-control" name="Checkout"/>
+                     <span class="input-group-addon">
+                     <span class="glyphicon glyphicon-calendar"></span>
+                     </span>
+            </div>
+        </div>
+        <div class="clear"></div>
+        @foreach (var ro in Model.Rooms){
+            <div class="border rounded">
+                <div class="left">
+                        <label for="RoomId">Room: @ro.RoomId</label>
+                        <label>@ro.Type</label>
+                        <label>@ro.View</label>
+                    @if (ro.Smoking == true){
+                            <label class="alert alert-danger" role="alert"><strong>Smoking</strong></label>
+                    }
+                </div>
+                <div class="right">
+                    <label>$@ro.Price/Night</label>
+                </div>
+            </div>
+        }
+        <div class="clear"></div>
+        <input type="submit" class="btn btn-primary" value="Make Reservation">
+    </form>
+</div>

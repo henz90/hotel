@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -10,16 +11,15 @@ namespace HotelProject.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
+        [BindProperty, Required]
+        public DateTime Checkin {get; set;}
 
-        public IndexModel(ILogger<IndexModel> logger)
+        [BindProperty, Required]
+        public DateTime Checkout {get; set;}
+
+        public IActionResult OnPost()
         {
-            _logger = logger;
-        }
-
-        public void OnGet()
-        {
-
+            return RedirectToPage("Reservation", new {Checkin = Checkin.Date.ToString("MM-dd-yyyy"), Checkout = Checkout.Date.ToString("MM-dd-yyyy")});
         }
     }
 }
