@@ -44,6 +44,6 @@ YYYY/MM/DD  -   NAME
 3.  AccessDenied done
 
 2020/09/01  -   Henry
-1.  Working on Reservation page
+1.  Working on Reservation page Adding to DB
 2.  Complete Reservation Page
 3.  Making reservation connect to roomid
