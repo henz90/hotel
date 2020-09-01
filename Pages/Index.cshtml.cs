@@ -19,6 +19,9 @@ namespace HotelProject.Pages
 
         public IActionResult OnPost()
         {
+            if (Checkin == null){   //  FIXME:  Correct so that unselected dates don't show as "01-01-0001"
+                return Page();    
+            }
             return RedirectToPage("Reservation", new {Checkin = Checkin.Date.ToString("MM-dd-yyyy"), Checkout = Checkout.Date.ToString("MM-dd-yyyy")});
         }
     }
