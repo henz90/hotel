@@ -42,3 +42,8 @@ YYYY/MM/DD  -   NAME
 1.  Forget Logic 90%
 2.  Forget cofirm still doing
 3.  AccessDenied done
+
+2020/09/01  -   Henry
+1.  Working on Reservation page
+2.  Complete Reservation Page
+3.  Making reservation connect to roomid
