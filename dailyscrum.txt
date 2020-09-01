@@ -29,11 +29,16 @@ YYYY/MM/DD  -   NAME
 3.  Learn more about identity and applying it to the webpages
 
 2020/08/28  -   Changmin
-1.  
-2.  
-3.  
+1.  Forget html page done
+2.  Forget html Page cofirm done
+3.  Extenal html page done
 
 2020/08/31  -   Henry
 1.  Completed Index Page
 2.  Complete Reservation Page
 3.  Issues passing Parameters
+
+2020/09/01  -   Changmin
+1.  Forget Logic 90%
+2.  Forget cofirm still doing
+3.  AccessDenied done

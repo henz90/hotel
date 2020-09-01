@@ -13,6 +13,8 @@ using hotel.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using HotelProject.Services;
 
 namespace HotelProject
 {
@@ -35,6 +37,8 @@ namespace HotelProject
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddRazorPages();
             services.AddDbContext<DatabaseContext>();
+            services.AddTransient<EmailSender>();
+            services.Configure<AuthMessageSenderOptions>(Configuration);
             services.Configure<IdentityOptions>(options =>
             {
                 // Password settings.
