@@ -42,3 +42,8 @@ YYYY/MM/DD  -   NAME
 1.  Forget Logic 90%
 2.  Forget cofirm still doing
 3.  AccessDenied done
+
+2020/09/02  -   Changmin
+1.  Forget Logic 100%
+2.  Forget cofirm still testing
+3.  Gmail logon going

@@ -38,15 +38,9 @@ namespace HotelProject.Services
             // Configuration.Default.AddApiKeyPrefix("partner-key", "Bearer");
 
             var apiInstance = new SMTPApi();
-            //var sendSmtpEmail = new SendSmtpEmail(); // SendSmtpEmail | Values to send a transactional email
-            var sendSmtpEmail = new SendSmtpEmail(sender:new SendSmtpEmailSender("noreply@libraryproject.ipd21.com", "No-Reply"),
+            var sendSmtpEmail = new SendSmtpEmail(sender:new SendSmtpEmailSender("No-Reply","noreply@hotelproject.ipd21.com"),
                                                     to: new List<SendSmtpEmailTo>() { new SendSmtpEmailTo(email,"Verify")},
                                                     htmlContent:message,subject:subject);
-            // {              
-            //     TextContent="hi",
-            //     HtmlContent = message,
-            //     Subject = subject
-            // };
             try
             {
                 // Send a transactional email
