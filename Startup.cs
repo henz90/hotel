@@ -15,7 +15,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using HotelProject.Services;
-
+using Microsoft.AspNetCore.Authentication;
 namespace HotelProject
 {
     public class Startup
@@ -39,6 +39,15 @@ namespace HotelProject
             services.AddDbContext<DatabaseContext>();
             services.AddTransient<EmailSender>();
             services.Configure<AuthMessageSenderOptions>(Configuration);
+            services.AddAuthentication()
+            .AddGoogle(options =>
+            {
+                IConfigurationSection googleAuthNSection =
+                    Configuration.GetSection("Authentication:Google");
+
+                options.ClientId = googleAuthNSection["ClientId"];
+                options.ClientSecret = googleAuthNSection["ClientSecret"];
+            });
             services.Configure<IdentityOptions>(options =>
             {
                 // Password settings.
