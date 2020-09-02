@@ -1,5 +1,18 @@
-﻿@page
+﻿@page "{Id:int}"
 @model Hotel.Pages.ReservationChangeModel
 @{
     ViewData["Title"] = "Reservation Change";
 }
+<div class="text-center">
+    <img src="/images/hotel.jpg" class="rounded img-fluid">
+    <h1 class="display-4">Current Reservation: </h1>
+    <h2 class="display-4">Reservation ID # <strong>@ViewData["Id"]</strong></h2>
+    <p>
+        Your room (#<strong>@ViewData["Room"]</strong>)
+        <br>
+        Checkin Date: <strong>@ViewData["Checkin"]</strong>
+        <br>
+        Checkout Date: <strong>@ViewData["Checkout"]</strong>
+
+    </p>
+</div>
