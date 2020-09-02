@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Hotel.Models
 {
@@ -10,5 +11,9 @@ namespace Hotel.Models
         public DateTime CheckIn { get; set;}
         public DateTime CheckOut { get; set;}
 
+        public static implicit operator List<object>(Reservation v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

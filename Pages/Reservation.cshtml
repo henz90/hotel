@@ -10,65 +10,61 @@
 <form method="post">
     <div class="left">
         <label for="Checkin"><h2>Check-In Date:</h2></label>
-        <div class='input-group date' id='checkin'>
-                    <input type='text' class="form-control" name="Checkin" value="@ViewData["Checkin"]" />
-                    <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-        </div>
+        <h3>@ViewData["Checkin"]</h3>
     </div>
     <div class="right">
         <label for="Checkout"><h2>Check-Out Date:</h2></label>
-        <div class='input-group date' id='checkout'>
-                    <input type='text' class="form-control" name="Checkout" value="@ViewData["Checkout"]"/>
-                    <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-        </div>
+        <h3>@ViewData["Checkout"]</h3>
     </div>
-    <div class="clear"></div>
+    <div class="clear justify-content-center">
+        <a class="btn btn-primary col-12" asp-page="/Index" role="button">Change Dates</a>
+    </div>
     <br>
-    @foreach (var ro in Model.Rooms){
-        <div class="border border-primary p-2">
-            <label class="left">
-                <input type="radio" id="@ro.RoomId" name="Room" value="@ro.RoomId" class="radio-inline">
-                @{
-                    switch(ro.Type){
-                        case "Queen":
-                            <img src="/images/queen.jpg" for="@ro.RoomId" class="rounded img-fluid" width="100" height="100">
-                        break;
-                        case "King":
-                            <img src="/images/king.jpg" for="@ro.RoomId" class="rounded img-fluid" width="100" height="100">
-                        break;
-                        case "Twin":
-                            <img src="/images/2beds.jpg" for="@ro.RoomId" class="rounded img-fluid" width="100" height="100">
-                        break;
-                        default:
-                            <img src="/images/single.jpg" for="@ro.RoomId" class="rounded img-fluid" width="100" height="100">
-                        break;
+    @if(Model.Rooms.Count == 0){
+        <h2 class="text-danger">No Rooms Available. Please choose different dates.</h2>
+    } else {
+        @foreach (var ro in Model.Rooms){
+            <div class="border border-primary p-2">
+                <label class="left">
+                    <input type="radio" id="@ro.RoomId" name="Room" value="@ro.RoomId" class="radio-inline">
+                    @{
+                        switch(ro.Type){
+                            case "Queen":
+                                <img src="/images/queen.jpg" for="@ro.RoomId" class="rounded img-fluid" width="100" height="100">
+                            break;
+                            case "King":
+                                <img src="/images/king.jpg" for="@ro.RoomId" class="rounded img-fluid" width="100" height="100">
+                            break;
+                            case "Twin":
+                                <img src="/images/2beds.jpg" for="@ro.RoomId" class="rounded img-fluid" width="100" height="100">
+                            break;
+                            default:
+                                <img src="/images/single.jpg" for="@ro.RoomId" class="rounded img-fluid" width="100" height="100">
+                            break;
+                        }
                     }
-                }
-            </label>
-            <label class="left pl-2" for="@ro.RoomId">
-                Room# @ro.RoomId
-                <br>
-                @ro.Type bed with @ro.View View
-                <br>
-                @if (ro.Smoking == true){
-                    <strong class="red">Smoking</strong>
-                } else {
-                    <strong>Non-Smoking</strong>
-                }
-                <br>
-                $@ro.Price/Night
-            </label>
-        <div class="clear"></div>
+                </label>
+                <label class="left pl-2" for="@ro.RoomId">
+                    Room# @ro.RoomId
+                    <br>
+                    @ro.Type bed with @ro.View View
+                    <br>
+                    @if (ro.Smoking == true){
+                        <strong class="red">Smoking</strong>
+                    } else {
+                        <strong>Non-Smoking</strong>
+                    }
+                    <br>
+                    $@ro.Price/Night
+                </label>
+            <div class="clear"></div>
+            </div>
+            <br>
+        }
+        <div class="text-center">
+            <input type="submit" class="btn btn-primary" value="Make Reservation">
         </div>
-        <br>
     }
-    <div class="text-center">
-        <input type="submit" class="btn btn-primary" value="Make Reservation">
-    </div>
 </form>
 <br>
 
