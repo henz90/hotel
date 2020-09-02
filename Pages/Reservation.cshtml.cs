@@ -23,7 +23,7 @@ namespace Hotel.Pages
 
         private readonly DatabaseContext db;  
         public ReservationModel(DatabaseContext db) => this.db = db;
-        public List<Room> Rooms { get; set; } = new List<Room>();  
+        public List<Room> Rooms { get; set; } // = new List<Room>();  
         public List<Reservation> Reservations {get; set; } // = new List<Reservation>();
         public void OnGet()
         {
