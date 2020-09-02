@@ -47,3 +47,13 @@ YYYY/MM/DD  -   NAME
 1.  Working on Reservation page Adding to DB
 2.  Complete Reservation Page
 3.  Making reservation connect to roomid
+
+2020/09/02  -   Changmin
+1.  
+2.  
+3.  
+
+2020/09/02  -   Henry
+1.  Reservations almost Complete
+2.  
+3.  Having big trouble with SQL query
