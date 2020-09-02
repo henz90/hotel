@@ -7,6 +7,7 @@
 <div class="text-center">
     <img src="/images/hotel.jpg" class="rounded img-fluid">
     <h1 class="display-4">Book your room today!</h1>
+@if(User.Identity.IsAuthenticated) {
     <form method="post">
         <div class="left">
             <label for="Checkin"><h2>Check-In Date:</h2></label>
@@ -29,5 +30,8 @@
         <div class="clear"></div>
         <input type="submit" class="btn btn-primary" value="Submit">
     </form>
+} else {
+    <h2><a asp-page="/Login">Login</a> or <a asp-page="/Register">Register</a> to book a room!</h2> // FIXME: Redirect Properly
+}   
 </div>
 

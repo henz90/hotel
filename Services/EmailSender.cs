@@ -10,6 +10,7 @@ using System.Collections;
 using System.Collections.Generic;
 using SendGrid;
 using SendGrid.Helpers.Mail;
+
 namespace HotelProject.Services
 {
     public class EmailSender 

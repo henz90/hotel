@@ -8,8 +8,7 @@ using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
-using HotelProject.Data;
-using hotel.Data;
+using Hotel.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -30,13 +29,16 @@ namespace HotelProject
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
+            /*services.AddDbContext<DatabaseContext>(options =>
                 options.UseSqlite(
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-            services.AddRazorPages();
+                    Configuration.GetConnectionString("DefaultConnection"))); */
             services.AddDbContext<DatabaseContext>();
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+                .AddEntityFrameworkStores<DatabaseContext>();
+            services.AddRazorPages();
             services.AddTransient<EmailSender>();
             services.Configure<AuthMessageSenderOptions>(Configuration);
             services.AddAuthentication()

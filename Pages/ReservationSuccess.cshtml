@@ -3,3 +3,16 @@
 @{
     ViewData["Title"] = "Enjoy your Trip!";
 }
+<div class="text-center">
+    <img src="/images/hotel.jpg" class="rounded img-fluid">
+    <h1 class="display-4">Congradulations!</h1>
+    <h2 class="display-4">Reservation ID # <strong>@ViewData["Id"]</strong></h2>
+    <p>
+        Your room (#<strong>@ViewData["Room"]</strong>) is booked!
+        <br>
+        Checkin Date: <strong>@ViewData["Checkin"]</strong>
+        <br>
+        Checkout Date: <strong>@ViewData["Checkout"]</strong>
+
+    </p>
+</div>

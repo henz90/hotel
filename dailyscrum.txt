@@ -43,7 +43,17 @@ YYYY/MM/DD  -   NAME
 2.  Forget cofirm still doing
 3.  AccessDenied done
 
+2020/09/01  -   Henry
+1.  Working on Reservation page Adding to DB
+2.  Complete Reservation Page
+3.  Making reservation connect to roomid
+
 2020/09/02  -   Changmin
 1.  Forget Logic 100%
 2.  Forget cofirm still testing
 3.  Gmail logon going
+
+2020/09/02  -   Henry
+1.  Reservations almost Complete
+2.  Reversation page completion, start on Reservation change
+3.  Having big trouble with SQL query

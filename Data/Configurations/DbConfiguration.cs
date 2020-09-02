@@ -1,8 +1,8 @@
-using hotel.Models;
+using Hotel.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace hotel.Data.Configurations
+namespace Hotel.Data.Configurations
 {
     public class DbConfiguration: IEntityTypeConfiguration<Reservation>
     {

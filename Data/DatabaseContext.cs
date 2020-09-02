@@ -1,10 +1,11 @@
-using hotel.Models;
-using hotel.Data.Configurations;
+using Hotel.Models;
+using Hotel.Data.Configurations;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
-namespace hotel.Data
+namespace Hotel.Data
 {
-    public class DatabaseContext: DbContext
+    public class DatabaseContext: IdentityDbContext
     {
         public DbSet<Reservation> Reservations { get; set; }
 
@@ -16,6 +17,7 @@ namespace hotel.Data
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new DbConfiguration());
         }
     }
