@@ -19,11 +19,10 @@ namespace Hotel.Pages
 
         public Reservation Reservation {get; set; }
 
-        public async Task OnGetAsync() => Reservation = await db.Reservations.FindAsync(Id);
-        public List<Room> Rooms { get; set; } = new List<Room>();
+        public List<Room> Rooms { get; set; }
 
         public void OnGet(){
-            //  FIXME: Reservation to pass to the page.
+            Reservation = db.Reservations.Find(Id);
             Rooms = db.Rooms.ToList();
         }
 

@@ -55,7 +55,14 @@
                         <strong>Non-Smoking</strong>
                     }
                     <br>
-                    $@ro.Price/Night
+                    $@ro.Price/Night | <strong>Total:</strong> $@{
+                        DateTime checkin = Convert.ToDateTime(ViewData["Checkin"].ToString());
+                        DateTime checkout = Convert.ToDateTime(ViewData["Checkout"].ToString());
+                        TimeSpan diff = checkout.Subtract(checkin);
+                        var price = ro.Price;
+                        var total = diff.Days*price;
+                        <text>@total</text>
+                    }
                 </label>
             <div class="clear"></div>
             </div>

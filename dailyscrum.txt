@@ -57,3 +57,13 @@ YYYY/MM/DD  -   NAME
 1.  Reservations almost Complete
 2.  Reversation page completion, start on Reservation change
 3.  Having big trouble with SQL query
+
+2020/09/03 -   Changmin
+1.  
+2.  
+3.  
+
+2020/09/03  -   Henry
+1.  Reservations Complete / ReservationChange Complete
+2.  ReversationView
+3.  Changmin helped with some small issues I was having
