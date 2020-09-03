@@ -18,7 +18,9 @@ namespace Hotel.Pages
         public List<Room> Rooms { get; set; } = new List<Room>();
         public void OnGet()
         {
-            Reservations = db.Reservations.Where(r => r.UserId == User.Identity.Name).ToList();
+            var userName = User.Identity.Name; // userName is email
+            var user = db.Users.Where(u => u.UserName == userName).FirstOrDefault(); // find user record
+            Reservations = db.Reservations.Where(r => r.User == user).ToList();
             Rooms = db.Rooms.ToList();
         }
     }

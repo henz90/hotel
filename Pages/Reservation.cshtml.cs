@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Hotel.Data;
 using Hotel.Models;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Hotel.Pages
 {
+    [Authorize]
     public class ReservationModel : PageModel
     {
         [BindProperty(SupportsGet = true), Required]
@@ -19,7 +21,8 @@ namespace Hotel.Pages
         public DateTime Checkout {get; set;}
 
         [BindProperty, Required]
-        public Room Room {get; set;}
+        public int RoomId {get; set; }
+       // public Room Room {get; set;}
 
         private readonly DatabaseContext db;  
         public ReservationModel(DatabaseContext db) => this.db = db;
@@ -43,8 +46,12 @@ namespace Hotel.Pages
                 Reservation reservation = new Reservation();
                 reservation.CheckIn = Checkin;
                 reservation.CheckOut = Checkout;
-                reservation.Room = Room;
-                reservation.UserId = User.Identity.Name;
+                Room room = db.Rooms.Find(RoomId);
+                // TODO: what if room is not found?
+                reservation.Room = room;    //  FIXME:  Creating a new room each time, why?
+                var userName = User.Identity.Name; // userName is email
+                var user = db.Users.Where(u => u.UserName == userName).FirstOrDefault(); // find user record
+                reservation.User = user;
                 db.Add(reservation);
                 db.SaveChanges();
                 int id = reservation.ReservationId;

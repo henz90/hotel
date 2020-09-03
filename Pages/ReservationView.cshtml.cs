@@ -4,11 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Hotel.Data;
 using Hotel.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Hotel.Pages
 {
+    [Authorize]
     public class ReservationViewModel : PageModel
     {
         private DatabaseContext db;
@@ -28,7 +30,10 @@ namespace Hotel.Pages
 
         public IActionResult OnPost()
         {
-            return Page();
+            Reservation = db.Reservations.Find(Id);
+            db.Reservations.Remove(Reservation);
+            db.SaveChanges();
+            return RedirectToPage("/Index");
         }
     }
 }

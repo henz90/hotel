@@ -1,5 +1,55 @@
 ﻿@page "{Id:int}"
 @model Hotel.Pages.ReservationViewModel
+@inject SignInManager<IdentityUser> SignInManager
 @{
-    ViewData["Title"] = "Reservation#"+@Model.Reservation.ReservationId;
+    ViewData["Title"] = "Reservation #"+@Model.Reservation.ReservationId;
 }
+@if (SignInManager.IsSignedIn(User)) {
+    <div class="text-center">
+        @{
+            switch(Model.Reservation.Room.Type){
+                case "Queen":
+                    <img src="/images/queen.jpg" class="rounded img-fluid" width="1000" height="1000">
+                break;
+                case "King":
+                    <img src="/images/king.jpg" class="rounded img-fluid" width="1000" height="1000">
+                break;
+                case "Twin":
+                    <img src="/images/2beds.jpg" class="rounded img-fluid" width="1000" height="1000">
+                break;
+                default:
+                    <img src="/images/single.jpg" class="rounded img-fluid" width="1000" height="1000">
+                break;
+            }
+        }
+        <p>
+            <h2><strong>Checkin:</strong> @Model.Reservation.CheckIn | <strong>Checkout:</strong> @Model.Reservation.CheckOut</h2>
+            <br>
+            <h3>Room #@Model.Reservation.Room.RoomId (
+                @if(Model.Reservation.Room.Smoking == true){
+                    <text>Smoking</text>
+                } else {
+                    <text>Non-Smoking</text>
+                }) with a @Model.Reservation.Room.Type bed viewing over the @Model.Reservation.Room.View</h3>
+            <br>
+            <h4><strong>Total:</strong> $@{
+                TimeSpan diff = Model.Reservation.CheckOut.Subtract(Model.Reservation.CheckIn);
+                var price = Model.Reservation.Room.Price;
+                var total = diff.Days*price;
+                <text>@total</text>
+            }</h4>
+        </p>
+        
+            <form method="post">
+                <label >Are you sure you want to cancel this reservation?</label>
+                <br>
+                <label>Yes</label>
+                <input type="checkbox" class="check" name="delete">
+                <br>
+                <input id="delete" type="submit" class="alert alert-danger" role="alert" value="Cancel Reservation">
+            </form>
+    </div>
+} else {
+    <h2><a asp-area="Identity" asp-page="/Account/Login">Login</a> or <a asp-area="Identity" asp-page="/Account/Register">Register</a> to book a room!</h2>
+}
+
