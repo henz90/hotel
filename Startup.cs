@@ -15,6 +15,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using HotelProject.Services;
 using Microsoft.AspNetCore.Authentication;
+using Stripe;
 namespace HotelProject
 {
     public class Startup
@@ -41,6 +42,9 @@ namespace HotelProject
             services.AddRazorPages();
             services.AddTransient<EmailSender>();
             services.Configure<AuthMessageSenderOptions>(Configuration);
+            //StripeConfiguration.ApiKey ="sk_test_51HA2pUIjlJ1JmMzPfsIcCJT7REmnESO6hLGzYJbWmtL70DCD9cWdgI8lejxiGDRTimxrMoKIRd1r0DthYQtos42H00jS7xVia3";
+            StripeConfiguration.ApiKey = Configuration.GetSection("Stripe")["SecretKey"];
+            services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
             services.AddAuthentication()
             .AddGoogle(options =>
             {
