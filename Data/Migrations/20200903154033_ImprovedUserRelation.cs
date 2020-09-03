@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HotelProject.Data.Migrations
 {
-    public partial class CreateDatabase : Migration
+    public partial class ImprovedUserRelation : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -188,6 +188,12 @@ namespace HotelProject.Data.Migrations
                         principalTable: "Rooms",
                         principalColumn: "RoomId",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Reservations_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -231,6 +237,11 @@ namespace HotelProject.Data.Migrations
                 name: "IX_Reservations_RoomId",
                 table: "Reservations",
                 column: "RoomId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Reservations_UserId",
+                table: "Reservations",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -257,10 +268,10 @@ namespace HotelProject.Data.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "Rooms");
 
             migrationBuilder.DropTable(
-                name: "Rooms");
+                name: "AspNetUsers");
         }
     }
 }

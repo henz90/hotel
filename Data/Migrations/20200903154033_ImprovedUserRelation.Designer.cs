@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelProject.Data.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20200901171959_CreateDatabase")]
-    partial class CreateDatabase
+    [Migration("20200903154033_ImprovedUserRelation")]
+    partial class ImprovedUserRelation
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -39,6 +39,8 @@ namespace HotelProject.Data.Migrations
                     b.HasKey("ReservationId");
 
                     b.HasIndex("RoomId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Reservations");
                 });
@@ -263,6 +265,10 @@ namespace HotelProject.Data.Migrations
                     b.HasOne("Hotel.Models.Room", "Room")
                         .WithMany()
                         .HasForeignKey("RoomId");
+
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -55,6 +55,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
     <script>
+        //  For Index
         $(function () {
             $('#checkin').datetimepicker({
                 format: 'MM/DD/YYYY'
@@ -64,11 +65,24 @@
                 useCurrent: false //Important! See issue #1075
             });
             $("#checkin").on("dp.change", function (e) {
-                $('#checkout').data("DateTimePicker").minDate(e.date);   //  FIXME:  Need to add 1 day to the date
+                newdate = e.date.setDate(e.date.getDate() + 1);
+                $('#checkout').data("DateTimePicker").minDate(newdate);   //  FIXME:  Need to add 1 day to the date // Fixed?
             });
             $("#checkout").on("dp.change", function (e) {
                 $('#checkin').data("DateTimePicker").maxDate(e.date);
             });
+        });
+
+        // For ReservationView
+        $('#delete').prop('disabled', true); // To disable initially
+
+        $(document).on('click', '.check', function(){
+            if( $('.checks:checked').length > 0 ){
+            $('#delete').prop('disabled', false);
+        }
+        else{
+            $('#delete').prop('disabled', true);
+        }
         });
     </script>
 

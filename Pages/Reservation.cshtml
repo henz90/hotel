@@ -26,7 +26,7 @@
         @foreach (var ro in Model.Rooms){
             <div class="border border-primary p-2">
                 <label class="left">
-                    <input type="radio" id="@ro.RoomId" name="Room" value="@ro.RoomId" class="radio-inline">
+                    <input type="radio" id="@ro.RoomId" name="RoomId" value="@ro.RoomId" class="radio-inline">
                     @{
                         switch(ro.Type){
                             case "Queen":

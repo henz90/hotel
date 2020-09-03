@@ -38,6 +38,8 @@ namespace HotelProject.Data.Migrations
 
                     b.HasIndex("RoomId");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("Reservations");
                 });
 
@@ -261,6 +263,10 @@ namespace HotelProject.Data.Migrations
                     b.HasOne("Hotel.Models.Room", "Room")
                         .WithMany()
                         .HasForeignKey("RoomId");
+
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
