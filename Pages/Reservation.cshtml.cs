@@ -30,11 +30,12 @@ namespace Hotel.Pages
             ViewData["Checkin"] = Checkin;
             ViewData["Checkout"] = Checkout;
             // query 1: find all reservations that exist where start OR end date is with the date range, then distinct(Room.Id) => list of room Ids that are occupied
-            // FIXME: NEEDS WORK
-            //.Where(r => r.CheckIn.CompareTo((DateTime)Checkin) >=0 && r.CheckOut.CompareTo((DateTime)Checkout) <=0)
-            //Reservations = db.Reservations.Where( ???? ).ToList();
+            var reservedRoomIds = db.Reservations.Where(
+                r => r.CheckIn.CompareTo((DateTime)Checkin) >= 0 && r.CheckIn.CompareTo((DateTime)Checkout) <= 0
+                    || r.CheckOut.CompareTo((DateTime)Checkin) >= 0 && r.CheckOut.CompareTo((DateTime)Checkout) <= 0
+                ).Select(r => r.Room.RoomId).ToHashSet();
             // query 2: find all rooms that do not have room.Id on the list created by query 1
-            Rooms = db.Rooms.Where(r => r.RoomId.Equals(Reservations)).ToList();
+            Rooms = db.Rooms.Where(r => !reservedRoomIds.Contains(r.RoomId) ).ToList();
         }
 
         public IActionResult OnPost(){

@@ -1,5 +1,37 @@
 ﻿@page
 @model Hotel.Pages.ReservationChangeModel
 @{
-    ViewData["Title"] = "Reservation Change";
+    ViewData["Title"] = "Reservations";
 }
+<div class="text-center">
+    <img src="/images/hotel.jpg" class="rounded img-fluid">
+    <h1 class="display-4">Current Reservations: </h1>
+    @{
+        var count = 1;
+        @foreach(var r in Model.Reservations){
+            <label>#@count.ToString(). Reservation Id: @r.ReservationId</label>
+            <p>
+                <strong>Checkin:</strong> @r.CheckIn | <strong>Checkout:</strong> @r.CheckOut
+                <br>
+                Room #@r.Room.RoomId (
+                    @if(r.Room.Smoking == true){
+                        <text>Smoking</text>
+                    } else {
+                        <text>Non-Smoking</text>
+                    }
+                ) with a @r.Room.Type bed viewing over the @r.Room.View
+                <br>
+                <strong>Total:</strong> $@{
+                    TimeSpan diff = r.CheckIn.Subtract(r.CheckOut);
+                    var price = r.Room.Price;
+                    var total = -diff.Days*price;
+                    <text>@total</text>
+                }
+                <a class="btn btn-primary col-12" asp-page="/ReservationView" asp-route-id="@r.ReservationId" role="button">Change Reservation</a>
+            </p>
+            <hr>
+            count++;
+        }
+    }
+    
+</div>

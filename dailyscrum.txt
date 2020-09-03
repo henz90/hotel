@@ -63,3 +63,7 @@ YYYY/MM/DD  -   NAME
 2.  Bills in the personal page is going
 3.  Will get all the bills from reservation, the count it in the stripe page
 
+2020/09/03  -   Henry
+1.  Reservations Complete / ReservationChange Complete
+2.  ReversationView
+3.  Changmin helped with some small issues I was having
