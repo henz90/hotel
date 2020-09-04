@@ -65,8 +65,7 @@
                 useCurrent: false //Important! See issue #1075
             });
             $("#checkin").on("dp.change", function (e) {
-                newdate = e.date.setDate(e.date.getDate() + 1);
-                $('#checkout').data("DateTimePicker").minDate(newdate);   //  FIXME:  Need to add 1 day to the date // Fixed?
+                $('#checkout').data("DateTimePicker").minDate(e.date);
             });
             $("#checkout").on("dp.change", function (e) {
                 $('#checkin').data("DateTimePicker").maxDate(e.date);
@@ -77,7 +76,7 @@
         $('#delete').prop('disabled', true); // To disable initially
 
         $(document).on('click', '.check', function(){
-            if( $('.checks:checked').length > 0 ){
+            if( $('.check:checked').length > 0 ){
             $('#delete').prop('disabled', false);
         }
         else{

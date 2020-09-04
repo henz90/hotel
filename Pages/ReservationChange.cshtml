@@ -21,11 +21,11 @@
                     }
                 ) with a @r.Room.Type bed viewing over the @r.Room.View
                 <br>
-                <strong>Total:</strong> $@{
+                <strong>Total:</strong> @{
                     TimeSpan diff = r.CheckIn.Subtract(r.CheckOut);
                     var price = r.Room.Price;
                     var total = -diff.Days*price;
-                    <text>@total</text>
+                    <text>@total.ToString("C")</text>
                 }
                 <a class="btn btn-primary col-12" asp-page="/ReservationView" asp-route-id="@r.ReservationId" role="button">Change Reservation</a>
             </p>

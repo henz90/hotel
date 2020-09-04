@@ -30,15 +30,7 @@ namespace HotelProject.Pages
             PublicKey = "pk_test_51HA2pUIjlJ1JmMzP0SL1QgxQLc3N4ME0X3D3ZiPZvN4VbT9xOWBJdrrjbpw1Zv36Xx7KNJ7LCtxLEQKLwHDrZQOw00bJLdtrxF";
         }
         public string PublicKey {get;}
-        // public void OnGet()
-        // {
-
-        //    // var reservedRoomIds = db.Reservations.Where(r => r.UserId == User.Identity.Name).Select(r => r.Room.RoomId).ToHashSet();
-        //    // Rooms = db.Rooms.Where(r => reservedRoomIds.Contains(r.RoomId)).ToList();
-        //    // var customers = new CustomerService();
-        // //Rooms = db.Rooms.Where(r => !reservedRoomIds.Contains(r.RoomId)).ToList();
-        // }
-
+     
         public IActionResult OnPost(string stripeEmail, string stripeToken,string stripePrice)
         {
             var customers = new CustomerService();
@@ -58,8 +50,8 @@ namespace HotelProject.Pages
                 Customer = customer.Id
             });
             db.Reservations.Where(c => c.User.Email == stripeEmail).ToList().ForEach(cc => cc.PayThebill = true);
-            db.SaveChanges();
             //Reservations = db.Reservations.Where(r => (r.User == user) && (r.PayThebill != true)).ToList();
+            db.SaveChanges();
             return Redirect("/Index");
            //return Page();
         }
