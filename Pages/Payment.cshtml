@@ -44,8 +44,10 @@
                   <div>
                     <div class="d-flex justify-content-between">
                       <p class="font-italic text-muted mr-5 small book-item-author">
-                      <strong>Checkin:</strong> @r.CheckIn | <strong>Checkout:</strong> @r.CheckOut
-                    </p>
+                        <strong>Checkin:</strong> @r.CheckIn
+                        <br>
+                        <strong>Checkout:</strong> @r.CheckOut
+                      </p>
                     <p class="font-italic text-muted ml-5 mr-5  small">
                         Room #@r.Room.RoomId (
                         @if(r.Room.Smoking == true){
@@ -60,7 +62,7 @@
                         TimeSpan diff = r.CheckIn.Subtract(r.CheckOut);
                         var price = r.Room.Price;
                         var total = -diff.Days*price;
-                        <text>@total</text>
+                        <text>@total.ToString("C")</text>
                         totalPayment=totalPayment+total;
                         }
                         </div>
@@ -79,7 +81,7 @@
         }
     }
     </div>
-    <h5 class="display-4">Your total fees: <span id="totalPayment"> @totalPayment</span> </h5>
+    <h5 class="display-4">Your total fees: <span id="totalPayment"> @totalPayment.ToString("C")</span> </h5>
     <div class="mt-5">
       <form  method="post" id="payment-form">
           <div class="form-row w-100 ">
