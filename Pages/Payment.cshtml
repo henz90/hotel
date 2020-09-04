@@ -58,7 +58,7 @@
                     ) with a @r.Room.Type bed viewing over the @r.Room.View
                     </p>
                     <div class="ml-5 w-25">
-                        <strong>Total:</strong> $@{
+                        <strong>Total:</strong> @{
                         TimeSpan diff = r.CheckIn.Subtract(r.CheckOut);
                         var price = r.Room.Price;
                         var total = -diff.Days*price;
