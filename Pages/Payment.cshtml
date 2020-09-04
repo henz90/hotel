@@ -1,24 +1,104 @@
 ﻿@page
 @model HotelProject.Pages.PaymentModel
+@inject SignInManager<IdentityUser> SignInManager
 @{
+    ViewData["Title"] = "Payments";
+    ViewData["Total"]=0.00;
 }
-<div>
-    <form  method="post" id="payment-form">
-        <div class="form-row w-100">
-            <div for="card-element" class="input-group  mb-4">
-                Credit or debit card
-            </div>
-            <div id="card-element" class="input-group  mb-4 w-100">
-            <!-- A Stripe Element will be inserted here. -->
-            </div>
+<div class="text-center h-100">
+    <img src="/images/hotel.jpg" class="rounded img-fluid">
+    <h1 class="display-4">Current Reservations: </h1>
+    
+    <div class="mb-5">
+    @{
+        var count = 1;
+        var totalPayment=0.00;
+        @foreach(var r in Model.Reservations){
+            @* <label>#@count.ToString(). Reservation Id: @r.ReservationId</label>
+            <p>
+                <strong>Checkin:</strong> @r.CheckIn | <strong>Checkout:</strong> @r.CheckOut
+                <br>
+                Room #@r.Room.RoomId (
+                    @if(r.Room.Smoking == true){
+                        <text>Smoking</text>
+                    } else {
+                        <text>Non-Smoking</text>
+                    }
+                ) with a @r.Room.Type bed viewing over the @r.Room.View
+                <br>
+                <strong>Total:</strong> $@{
+                    TimeSpan diff = r.CheckIn.Subtract(r.CheckOut);
+                    var price = r.Room.Price;
+                    var total = -diff.Days*price;
+                    <text>@total</text>
+                }
+                <a class="btn btn-primary col-12" asp-page="/ReservationView" asp-route-id="@r.ReservationId" role="button">Change Reservation</a>
+            </p>
+            <hr> *@
 
-            <!-- Used to display form errors. -->
-            <div id="card-errors" role="alert" class="input-group  mb-4"></div>
-        </div>
+            	<div class="media flex-column flex-lg-row border shadow p-3 " style="height:100%">
+                <div class="media-body h-100 col-12 ml-5">
+                  
+                  <h5 class="mt-0 font-weight-bold mb-2 book-item-name">#@count.ToString(). Reservation Id: @r.ReservationId</h5>
+                  <div  class="d-flex justify-content-around col-12">
+                  <div>
+                    <div class="d-flex justify-content-between">
+                      <p class="font-italic text-muted mr-5 small book-item-author">
+                      <strong>Checkin:</strong> @r.CheckIn | <strong>Checkout:</strong> @r.CheckOut
+                    </p>
+                    <p class="font-italic text-muted ml-5 mr-5  small">
+                        Room #@r.Room.RoomId (
+                        @if(r.Room.Smoking == true){
+                            <text>Smoking</text>
+                        } else {
+                            <text>Non-Smoking</text>
+                        }
+                    ) with a @r.Room.Type bed viewing over the @r.Room.View
+                    </p>
+                    <div class="ml-5 w-25">
+                        <strong>Total:</strong> $@{
+                        TimeSpan diff = r.CheckIn.Subtract(r.CheckOut);
+                        var price = r.Room.Price;
+                        var total = -diff.Days*price;
+                        <text>@total</text>
+                        totalPayment=totalPayment+total;
+                        }
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                </div>
+                <div class="mt-4">
+          
+                      
+                    <a class="btn btn-primary " asp-page="/ReservationView" asp-route-id="@r.ReservationId" role="button">Change Reservation</a>
+                  
+                </div>
+						</div>
+            count++;
+        }
+    }
+    </div>
+    <h5 class="display-4">Your total fees: <span id="totalPayment"> @totalPayment</span> </h5>
+    <div class="mt-5">
+      <form  method="post" id="payment-form">
+          <div class="form-row w-100 ">
+              <div for="card-element" class="input-group text-white mb-4 bg-danger p-3">
+                  Credit or debit card
+              </div>
+              <div id="card-element" class="input-group  mb-4 w-100 border border-warning">
+              <!-- A Stripe Element will be inserted here. -->
+              </div>
 
-        <button class="btn-primary">Submit Payment</button>
-    </form>
+              <!-- Used to display form errors. -->
+              <div id="card-errors" role="alert" class="input-group  mb-4"></div>
+          </div>
+
+          <button class="btn-primary">Submit Payment</button>
+      </form>
+  </div>
 </div>
+
 
 @section scripts{
     <script src="https://js.stripe.com/v3/"></script>
@@ -85,8 +165,20 @@ function stripeTokenHandler(token) {
   hiddenInput.setAttribute('type', 'hidden');
   hiddenInput.setAttribute('name', 'stripeToken');
   hiddenInput.setAttribute('value', token.id);
-  form.appendChild(hiddenInput);
 
+  var hiddenInput2 = document.createElement('input');
+  hiddenInput2.setAttribute('type', 'hidden');
+  hiddenInput2.setAttribute('name','stripeEmail');
+  hiddenInput2.setAttribute('value', '@User.Identity.Name');
+
+  var hiddenInput3 = document.createElement('input');
+  hiddenInput3.setAttribute('type', 'hidden');
+  hiddenInput3.setAttribute('name','stripePrice');
+  hiddenInput3.setAttribute('value', '@totalPayment');
+
+  form.appendChild(hiddenInput);
+  form.appendChild(hiddenInput2);
+  form.appendChild(hiddenInput3);
   // Submit the form
   form.submit();
 }

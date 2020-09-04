@@ -67,3 +67,8 @@ YYYY/MM/DD  -   NAME
 1.  Reservations Complete / ReservationChange Complete
 2.  ReversationView
 3.  Changmin helped with some small issues I was having
+
+2020/09/03  -   Changmin
+1.  Stripe payment going on 70%
+2.  Bills in the personal page is going.
+3.  Will get all the bills from reservation, the count it in the stripe page

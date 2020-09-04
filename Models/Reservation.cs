@@ -12,7 +12,7 @@ namespace Hotel.Models
         public IdentityUser User {get; set;}
         public DateTime CheckIn { get; set;}
         public DateTime CheckOut { get; set;}
-
+        public Boolean PayThebill { get; set; }
         public static implicit operator List<object>(Reservation v)
         {
             throw new NotImplementedException();
