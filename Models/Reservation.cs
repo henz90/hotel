@@ -8,7 +8,6 @@ namespace Hotel.Models
     {
         public int ReservationId { get; set;}
         public Room Room { get; set; }
-        //public string UserId { get; set;}
         public IdentityUser User {get; set;}
         public DateTime CheckIn { get; set;}
         public DateTime CheckOut { get; set;}

@@ -1,0 +1,12 @@
+RoomId,Type,Smoking,View,Price
+1,King,0,Waterfront,199.99
+2,Queen,1,Cityside,99.99
+3,Twins,0,Waterside,79.99
+4,Double,1,Waterside,89.99
+5,Single,0,Waterside,59.99
+6,King,0,Waterside,199.99
+7,Twins,1,Cityside,89.99
+8,Single,0,Cityside,45.99
+9,Queen,1,Waterside,125.99
+10,King,0,Waterside,199.99
+11,Twins,0,Waterside,59.99
