@@ -68,7 +68,12 @@ YYYY/MM/DD  -   NAME
 2.  ReversationView
 3.  Changmin helped with some small issues I was having
 
-2020/09/03  -   Changmin
+2020/09/04  -   Changmin
 1.  Stripe payment going on 70%
 2.  Bills in the personal page is going.
 3.  Will get all the bills from reservation, the count it in the stripe page
+
+2020/09/03  -   Henry
+1.  ReservationView Complete
+2.  Bug Fixing and improving user QOL
+3.  Finding and correcting issues with 
