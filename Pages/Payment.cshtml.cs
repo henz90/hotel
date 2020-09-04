@@ -25,8 +25,7 @@ namespace HotelProject.Pages
         public List<Room> Rooms { get; set; }
         public void OnGet()
         {
-
-            var reservedRoomIds = db.Reservations.Where(r => r.UserId == User.Identity.Name).Select(r => r.Room.RoomId).ToHashSet();
+            var reservedRoomIds = db.Reservations.Where(r => r.User.Id == User.Identity.Name).Select(r => r.Room.RoomId).ToHashSet();
             Rooms = db.Rooms.Where(r => reservedRoomIds.Contains(r.RoomId)).ToList();
             var customers = new CustomerService();
         //Rooms = db.Rooms.Where(r => !reservedRoomIds.Contains(r.RoomId)).ToList();
