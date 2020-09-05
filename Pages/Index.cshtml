@@ -35,3 +35,25 @@
 }   
 </div>
 
+@section scripts{
+    <script>
+    $(function () {
+            $('#checkin').datetimepicker({
+                format: 'MM/DD/YYYY',
+                minDate: moment()
+            });
+            $('#checkout').datetimepicker({
+                format: 'MM/DD/YYYY',
+                minDate: moment(),
+                useCurrent: false //Important! See issue #1075
+            });
+            $("#checkin").on("dp.change", function (e) {
+                $('#checkout').data("DateTimePicker").minDate(e.date);
+            });
+            $("#checkout").on("dp.change", function (e) {
+                $('#checkin').data("DateTimePicker").maxDate(e.date);
+            });
+        });
+    </script>
+}
+
