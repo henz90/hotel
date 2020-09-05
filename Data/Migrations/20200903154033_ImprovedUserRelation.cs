@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HotelProject.Data.Migrations
 {
-    public partial class CreateDatabase : Migration
+    public partial class ImprovedUserRelation : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -169,34 +169,6 @@ namespace HotelProject.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Bills",
-                columns: table => new
-                {
-                    BillId = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    RoomId = table.Column<int>(nullable: true),
-                    UserId = table.Column<string>(nullable: true),
-                    BillCreated = table.Column<DateTime>(nullable: false),
-                    Amount = table.Column<long>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Bills", x => x.BillId);
-                    table.ForeignKey(
-                        name: "FK_Bills_Rooms_RoomId",
-                        column: x => x.RoomId,
-                        principalTable: "Rooms",
-                        principalColumn: "RoomId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Bills_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Reservations",
                 columns: table => new
                 {
@@ -205,8 +177,7 @@ namespace HotelProject.Data.Migrations
                     RoomId = table.Column<int>(nullable: true),
                     UserId = table.Column<string>(nullable: true),
                     CheckIn = table.Column<DateTime>(nullable: false),
-                    CheckOut = table.Column<DateTime>(nullable: false),
-                    PayThebill = table.Column<bool>(nullable: false)
+                    CheckOut = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -263,16 +234,6 @@ namespace HotelProject.Data.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Bills_RoomId",
-                table: "Bills",
-                column: "RoomId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Bills_UserId",
-                table: "Bills",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Reservations_RoomId",
                 table: "Reservations",
                 column: "RoomId");
@@ -299,9 +260,6 @@ namespace HotelProject.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
-
-            migrationBuilder.DropTable(
-                name: "Bills");
 
             migrationBuilder.DropTable(
                 name: "Reservations");

@@ -5,23 +5,11 @@
 }
 <div class="text-center">
     <img src="/images/hotel.jpg" class="rounded img-fluid">
-    @if(Model.Reservations.Count == 0){
-            <h1>No Reservations Made</h1>
-        } else {
-            var count = 1;
-            <h1 class="display-4">Current Reservations: </h1>
+    <h1 class="display-4">Current Reservations: </h1>
+    @{
+        var count = 1;
         @foreach(var r in Model.Reservations){
             <label>#@count.ToString(). Reservation Id: @r.ReservationId</label>
-            <br>
-            @if(r.PayThebill == true){
-                <div class="alert alert-success" role="alert">
-                    This Reservation has been paid
-                </div>
-            } else {
-                <div class="alert alert-danger" role="alert">
-                    This Reservation has NOT been paid
-                </div>
-            }
             <p>
                 <strong>Checkin:</strong> @r.CheckIn | <strong>Checkout:</strong> @r.CheckOut
                 <br>
@@ -39,7 +27,6 @@
                     var total = -diff.Days*price;
                     <text>@total.ToString("C")</text>
                 }
-                <br>
                 <a class="btn btn-primary col-12" asp-page="/ReservationView" asp-route-id="@r.ReservationId" role="button">Change Reservation</a>
             </p>
             <hr>

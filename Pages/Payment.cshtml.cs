@@ -8,6 +8,7 @@ using Stripe;
 using Hotel.Data;
 using Hotel.Models;
 using System.ComponentModel.DataAnnotations;
+using System.Collections;
 namespace HotelProject.Pages
 {
     public class PaymentModel : PageModel
@@ -16,11 +17,15 @@ namespace HotelProject.Pages
         //public PaymentModel(DatabaseContext db) => 
         public List<Reservation> Reservations { get; set; } = new List<Reservation>();
         public List<Room> Rooms { get; set; } = new List<Room>();
+        
+        [BindProperty(SupportsGet = true)]
+        public List<int> ids { get; set; } //= new List<int>();
         public void OnGet()
         {
+            ViewData["Checkin"] = ids;
             var userName = User.Identity.Name; // userName is email
             var user = db.Users.Where(u => u.UserName == userName).FirstOrDefault(); // find user record
-            Reservations = db.Reservations.Where(r => (r.User == user) && (r.PayThebill != true)).ToList();
+            Reservations = db.Reservations.Where(r => (r.User == user)).ToList();
             Rooms = db.Rooms.ToList();
         }
         public PaymentModel(DatabaseContext db)
@@ -31,7 +36,7 @@ namespace HotelProject.Pages
         }
         public string PublicKey {get;}
      
-        public IActionResult OnPost(string stripeEmail, string stripeToken,string stripePrice)
+        public IActionResult OnPost(string stripeEmail, string stripeToken,string stripePrice,string ids)
         {
             var customers = new CustomerService();
             var charges = new ChargeService();
@@ -49,11 +54,20 @@ namespace HotelProject.Pages
                 Currency = "cad",
                 Customer = customer.Id
             });
-            db.Reservations.Where(c => c.User.Email == stripeEmail).ToList().ForEach(cc => cc.PayThebill = true);
-            //Reservations = db.Reservations.Where(r => (r.User == user) && (r.PayThebill != true)).ToList();
+        
+            string[] idsStr = ids.Split(',');//List<string> idsStr = ids.Split(',').ToList();
+            int[] idsInt = Array.ConvertAll(idsStr, s => int.Parse(s));
+            db.Reservations.Where(c => idsInt.Contains(c.Room.RoomId)).ToList().ForEach(cc => cc.PayThebill = true);
+            var userName = User.Identity.Name; // userName is email
+            var user = db.Users.Where(u => u.UserName == userName).FirstOrDefault();
+            Bill bill = new Bill();
+            bill.RoomIds = ids;
+            bill.User = user;
+            bill.BillCreated = DateTime.Now;
+            bill.Amount = (long)Convert.ToDouble(stripePrice);
+            db.Add(bill);
             db.SaveChanges();
             return Redirect("/Index");
-           //return Page();
         }
     }
 }
