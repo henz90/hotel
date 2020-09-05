@@ -12,60 +12,76 @@
     <div class="mb-5">
     @{
         var count = 1;
-        string[] proinfo = new string[] { "a", "b" } ;
+        var totalPayment=0.00;
         @foreach(var r in Model.Reservations){
-          <div class="media flex-column flex-lg-row border shadow p-3 " style="height:100%">
-            <div class="media-body h-100 col-12 ml-5">
-              
-              <h4 class="mt-0 font-weight-bold mb-2 text-left p-5">#@count.ToString(). Reservation Id: @r.ReservationId</h4>
-              <div  class="d-flex justify-content-around col-12">
-              <div>
-                <div class="d-flex justify-content-between">
-                  <p class="font-italic text-muted mr-5 small book-item-author">
-                  <strong>Checkin:</strong> @r.CheckIn <br> <strong>Checkout:</strong> @r.CheckOut
-                </p>
-                <p class="font-italic text-muted ml-5 mr-5  small">
-                    Room #@r.Room.RoomId (
+            @* <label>#@count.ToString(). Reservation Id: @r.ReservationId</label>
+            <p>
+                <strong>Checkin:</strong> @r.CheckIn | <strong>Checkout:</strong> @r.CheckOut
+                <br>
+                Room #@r.Room.RoomId (
                     @if(r.Room.Smoking == true){
                         <text>Smoking</text>
                     } else {
                         <text>Non-Smoking</text>
                     }
                 ) with a @r.Room.Type bed viewing over the @r.Room.View
-                </p>
-                <div class="ml-5 w-25">
-                    <strong>Total:</strong> $@{
-                      TimeSpan diff = r.CheckIn.Subtract(r.CheckOut);
-                      var price = r.Room.Price;
-                      var total = -diff.Days*price;
-                      <text>@total</text>
-                   
-                    }
+                <br>
+                <strong>Total:</strong> $@{
+                    TimeSpan diff = r.CheckIn.Subtract(r.CheckOut);
+                    var price = r.Room.Price;
+                    var total = -diff.Days*price;
+                    <text>@total</text>
+                }
+                <a class="btn btn-primary col-12" asp-page="/ReservationView" asp-route-id="@r.ReservationId" role="button">Change Reservation</a>
+            </p>
+            <hr> *@
+
+            	<div class="media flex-column flex-lg-row border shadow p-3 " style="height:100%">
+                <div class="media-body h-100 col-12 ml-5">
+                  
+                  <h5 class="mt-0 font-weight-bold mb-2 book-item-name">#@count.ToString(). Reservation Id: @r.ReservationId</h5>
+                  <div  class="d-flex justify-content-around col-12">
+                  <div>
+                    <div class="d-flex justify-content-between">
+                      <p class="font-italic text-muted mr-5 small book-item-author">
+                      <strong>Checkin:</strong> @r.CheckIn | <strong>Checkout:</strong> @r.CheckOut
+                    </p>
+                    <p class="font-italic text-muted ml-5 mr-5  small">
+                        Room #@r.Room.RoomId (
+                        @if(r.Room.Smoking == true){
+                            <text>Smoking</text>
+                        } else {
+                            <text>Non-Smoking</text>
+                        }
+                    ) with a @r.Room.Type bed viewing over the @r.Room.View
+                    </p>
+                    <div class="ml-5 w-25">
+                        <strong>Total:</strong> $@{
+                        TimeSpan diff = r.CheckIn.Subtract(r.CheckOut);
+                        var price = r.Room.Price;
+                        var total = -diff.Days*price;
+                        <text>@total</text>
+                        totalPayment=totalPayment+total;
+                        }
+                        </div>
+                    </div>
                   </div>
-                        <div class="ml-3 pl-2">
-    
-            @if(r.PayThebill == true){
-              <div class="btn btn-success ">Already Chechout</div>
-            }else{
-              <a class="btn btn-primary " asp-page="/ReservationView" asp-route-id="@r.ReservationId" role="button">Change Reservation</a>
-                <br><input type="checkbox" class="roomId" value="@r.Room.RoomId" price="@total" onclick="checkOut(this)">
-                <label for="vehicle1"> Check Out</label><br>
-            }
-          </div>
                 </div>
-              </div>
-            </div>
-          </div>
-    
-        </div>
-        count++;
+                </div>
+                <div class="mt-4">
+          
+                      
+                    <a class="btn btn-primary " asp-page="/ReservationView" asp-route-id="@r.ReservationId" role="button">Change Reservation</a>
+                  
+                </div>
+						</div>
+            count++;
         }
     }
     </div>
-    <h5 class="display-4">Fees payment: <span id="totalPayment"></span> </h5>
+    <h5 class="display-4">Your total fees: <span id="totalPayment"> @totalPayment</span> </h5>
     <div class="mt-5">
       <form  method="post" id="payment-form">
-    
           <div class="form-row w-100 ">
               <div for="card-element" class="input-group text-white mb-4 bg-danger p-3">
                   Credit or debit card
@@ -87,17 +103,6 @@
 @section scripts{
     <script src="https://js.stripe.com/v3/"></script>
     <script>
-      var totalPayment=0
-      function checkOut(e){
-        let value = e.getAttribute('price');
-        if(e.checked){
-          totalPayment=totalPayment+parseFloat(value);
-        }else{
-          totalPayment=totalPayment-parseFloat(value);
-        }
-        
-        $("#totalPayment").html(totalPayment);
-      }
          var stripe = Stripe('@Model.PublicKey');
         var elements = stripe.elements();
 
@@ -155,15 +160,7 @@ form.addEventListener('submit', function(event) {
 // Submit the form with the token ID.
 function stripeTokenHandler(token) {
   // Insert the token ID into the form so it gets submitted to the server
-  var selectIdsDom = document.getElementsByClassName('roomId');
-  var ids=[];
-  for (const key in selectIdsDom) {
-    if(selectIdsDom[key].checked){
-      ids.push(selectIdsDom[key].value);
-    }
-  }
   var form = document.getElementById('payment-form');
-
   var hiddenInput = document.createElement('input');
   hiddenInput.setAttribute('type', 'hidden');
   hiddenInput.setAttribute('name', 'stripeToken');
@@ -177,17 +174,11 @@ function stripeTokenHandler(token) {
   var hiddenInput3 = document.createElement('input');
   hiddenInput3.setAttribute('type', 'hidden');
   hiddenInput3.setAttribute('name','stripePrice');
-  hiddenInput3.setAttribute('value', totalPayment);
-
-  var hiddenInput4 = document.createElement('input');
-  hiddenInput4.setAttribute('type', 'hidden');
-  hiddenInput4.setAttribute('name','ids');
-  hiddenInput4.setAttribute('value', ids);
+  hiddenInput3.setAttribute('value', '@totalPayment');
 
   form.appendChild(hiddenInput);
   form.appendChild(hiddenInput2);
   form.appendChild(hiddenInput3);
-  form.appendChild(hiddenInput4);
   // Submit the form
   form.submit();
 }

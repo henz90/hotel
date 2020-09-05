@@ -16,33 +16,6 @@ namespace HotelProject.Data.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.7");
 
-            modelBuilder.Entity("Hotel.Models.Bill", b =>
-                {
-                    b.Property<int>("BillId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<long>("Amount")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("BillCreated")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int?>("RoomId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("BillId");
-
-                    b.HasIndex("RoomId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Bills");
-                });
-
             modelBuilder.Entity("Hotel.Models.Reservation", b =>
                 {
                     b.Property<int>("ReservationId")
@@ -286,17 +259,6 @@ namespace HotelProject.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("Hotel.Models.Bill", b =>
-                {
-                    b.HasOne("Hotel.Models.Room", "Room")
-                        .WithMany()
-                        .HasForeignKey("RoomId");
-
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Hotel.Models.Reservation", b =>
