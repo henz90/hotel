@@ -1,0 +1,24 @@
+﻿@page
+@model HotelProject.Pages.BillsModel
+@{
+}
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr >
+                <th class="text-center"  scope="col">Room No.</th>
+                <th class="text-center" scope="col">Date</th>
+                <th class="text-center" scope="col">Email</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var bill in Model.Bills){
+                <tr class="text-center">
+                    <td>@bill.RoomIds</td>
+                    <td>@bill.BillCreated</td>
+                    <td><i class="fa fa-usd" aria-hidden="true"></i>@bill.Amount</td>
+                </tr>
+        }
+        </tbody>
+    </table>
+</div>

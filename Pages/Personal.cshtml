@@ -6,29 +6,32 @@
 <div class="container">
 @if (SignInManager.IsSignedIn(User))
 {
-    <div class="col-6 mx-auto">
+    <div class="col-8 mx-auto">
         <ul class="list-group shadow">
 			<li class="list-group-item text-bold">
 				<div class="row justify-content-center">
 					<i class="fa align-self-center fa-user-circle fa-3x d-line"></i>
-					<h3 class="d-line align-self-center ml-5 mt-2">@User.Identity.Name</h3>
+					<h1 class="d-line align-self-center ml-5 mt-2">@User.Identity.Name</h1>
 				</div>
 			</li>
-			<li class="list-group-item text-dark py-4">
-				<a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage" class="text-dark">
-					<i class="fa fa-address-card mr-5" aria-hidden="true"></i>My Profile: 
+			<li class="list-group-item text-dark  p-5" style="font-size: 20px;">
+				<a asp-area="Identity" asp-page="/Account/Manage/Index" class="d-flex justify-content-between text-dark">
+					<i class="fa fa-address-card mr-5" aria-hidden="true"></i>
+					<span>My Profile </span>
 					<i class="fa fa-chevron-right float-right mt-1" aria-hidden="true"></i>
 				</a>
 			</li>
-			<li class="list-group-item text-dark py-4">
-				<a  class="text-dark" asp-page="/Payment">
-					<i class="fa fa-credit-card mr-5" aria-hidden="true"></i>My Payment: 
+			<li class="list-group-item text-dark p-5" style="font-size: 20px;">
+				<a   asp-page="/Payment" class="d-flex justify-content-between text-dark">
+					<i class="fa fa-credit-card mr-5" aria-hidden="true"></i>
+					<span>Go to Payment </span>
 					<i class="fa fa-chevron-right float-right mt-1" aria-hidden="true"></i>
 				</a>
 			</li>
-			<li class="list-group-item text-dark py-4">
-				<a  class="text-dark" asp-page="/Payment">
-					<i class="fa fa-credit-card mr-5" aria-hidden="true"></i>My Bills: 
+			<li class="list-group-item text-dark p-5" style="font-size: 20px;">
+				<a  asp-page="/Bills" class="d-flex justify-content-between text-dark">
+					<i class="fa fa-money mr-5" aria-hidden="true"></i>
+					<span>My Bills</span>
 					<i class="fa fa-chevron-right float-right mt-1" aria-hidden="true"></i>
 				</a>
 			</li>

@@ -72,3 +72,8 @@ YYYY/MM/DD  -   NAME
 1.  Stripe payment going on 70%
 2.  Bills in the personal page is going.
 3.  Will get all the bills from reservation, the count it in the stripe page
+
+2020/09/03  -   Changmin
+1.  Stripe payment Done
+2.  Bills in the personal page is Done.
+3.  Will fix the page problem

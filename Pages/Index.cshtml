@@ -6,6 +6,9 @@
 
 <div class="text-center">
     <img src="/images/hotel.jpg" class="rounded img-fluid">
+    <div class="ml-auto mt-3 mb-0">
+            <div id="map" style="height:35rem;"></div>
+    </div>
     <h1 class="display-4">Book your room today!</h1>
 @if(User.Identity.IsAuthenticated) {
     <form method="post">
@@ -30,8 +33,67 @@
         <div class="clear"></div>
         <input type="submit" class="btn btn-primary" value="Submit">
     </form>
+
 } else {
     <h2><a asp-area="Identity" asp-page="/Account/Login">Login</a> or <a asp-area="Identity" asp-page="/Account/Register">Register</a> to book a room!</h2>
 }   
 </div>
 
+
+@section scripts{
+    <script>
+      function initMap(){
+      // Map options
+      var options = {
+        zoom:10,
+        center:{lat:45.5017,lng:-73.5673}
+
+      }
+      var map = new google.maps.Map(document.getElementById('map'), options);
+      google.maps.event.addListener(map, 'click', function(event){
+        // Add marker
+        addMarker({coords:event.latLng});
+      });
+      var markers = [
+        {
+          coords:{lat:45.4550,lng:-73.4681},
+          iconImage:'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+          content:'<h1>Hotel Brossard</h1>'
+        },
+        {
+          coords:{lat:45.5017,lng:-73.5673},
+          content:'<h1>Hotel Hilton</h1>'
+        }
+      ];
+      // Loop through markers
+      for(var i = 0;i < markers.length;i++){
+        // Add marker
+        addMarker(markers[i]);
+      }
+      // Add Marker Function
+      function addMarker(props){
+        var marker = new google.maps.Marker({
+          position:props.coords,
+          map:map,
+          //icon:props.iconImage
+        });
+        // Check for customicon
+        if(props.iconImage){
+          // Set icon image
+          marker.setIcon(props.iconImage);
+        }
+        // Check content
+        if(props.content){
+          var infoWindow = new google.maps.InfoWindow({
+            content:props.content
+          });
+
+          marker.addListener('click', function(){
+            infoWindow.open(map, marker);
+          });
+        }
+      }
+    }
+    </script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNH5E009XiS1mH541VVjdN7ryo-kksMuQ&callback=initMap"></script>
+}
