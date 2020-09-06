@@ -100,10 +100,12 @@
     $(function () {
             $('#checkin').datetimepicker({
                 format: 'MM/DD/YYYY',
-                minDate: moment()
+                minDate: moment(),
+                //useCurrent: false
             });
             $('#checkout').datetimepicker({
                 format: 'MM/DD/YYYY',
+                minDate: moment(),
                 useCurrent: false //Important! See issue #1075
             });
             $("#checkin").on("dp.change", function (e) {
