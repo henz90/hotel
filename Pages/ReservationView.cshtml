@@ -53,3 +53,18 @@
     <h2><a asp-area="Identity" asp-page="/Account/Login">Login</a> or <a asp-area="Identity" asp-page="/Account/Register">Register</a> to book a room!</h2>
 }
 
+@section scripts{
+    <script>
+        //  For DateTime Picker
+        $('#delete').prop('disabled', true); // To disable initially
+
+        $(document).on('click', '.check', function(){
+            if( $('.check:checked').length > 0 ){
+            $('#delete').prop('disabled', false);
+        }
+        else{
+            $('#delete').prop('disabled', true);
+        }
+        });
+    </script>
+}

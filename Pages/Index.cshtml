@@ -41,6 +41,7 @@
 
 
 @section scripts{
+
     <script>
       function initMap(){
       // Map options
@@ -94,6 +95,25 @@
         }
       }
     }
+
+    //  For dateTimePicker
+    $(function () {
+            $('#checkin').datetimepicker({
+                format: 'MM/DD/YYYY',
+                minDate: moment()
+            });
+            $('#checkout').datetimepicker({
+                format: 'MM/DD/YYYY',
+                useCurrent: false //Important! See issue #1075
+            });
+            $("#checkin").on("dp.change", function (e) {
+                $('#checkout').data("DateTimePicker").minDate(e.date);
+            });
+            $("#checkout").on("dp.change", function (e) {
+                $('#checkin').data("DateTimePicker").maxDate(e.date);
+            });
+        });
+
     </script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNH5E009XiS1mH541VVjdN7ryo-kksMuQ&callback=initMap"></script>
 }
