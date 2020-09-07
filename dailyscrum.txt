@@ -73,7 +73,11 @@ YYYY/MM/DD  -   NAME
 2.  Bills in the personal page is going.
 3.  Will get all the bills from reservation, the count it in the stripe page
 
-2020/09/03  -   Changmin
+2020/09/04  -   Changmin
 1.  Stripe payment Done
 2.  Bills in the personal page is Done.
 3.  Will fix the page problem
+
+2020/09/07  -   Changmin
+1.  All Done.
+2.  Test Done.
