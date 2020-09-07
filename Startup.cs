@@ -85,6 +85,17 @@ namespace HotelProject
                 options.AccessDeniedPath = "/Identity/Account/AccessDenied";
                 options.SlidingExpiration = true;
             });
+            // Antiforgery tokens require data protection.
+            services.AddDataProtection()
+                // Store keys in Cloud Storage so that multiple instances
+                // of the web application see the same keys.
+                .PersistKeysToGoogleCloudStorage(
+                    Configuration["DataProtection:Bucket"],
+                    Configuration["DataProtection:Object"])
+                // Protect the keys with Google KMS for encryption and fine-
+                // grained access control.
+                .ProtectKeysWithGoogleKms(
+                    Configuration["DataProtection:KmsKeyName"]);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
