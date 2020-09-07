@@ -11,6 +11,6 @@ namespace Hotel.Models
         public string RoomIds { get; set;}
         public IdentityUser User {get; set;}
         public DateTime BillCreated { get; set;}
-        public long Amount { get; set; }
+        public double Amount { get; set; }
     }
 }

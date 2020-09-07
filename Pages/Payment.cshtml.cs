@@ -46,7 +46,7 @@ namespace HotelProject.Pages
                 Email = stripeEmail,
                 Source = stripeToken
             });
-
+            //var amount = Convert.ToDouble(stripePrice);
             var charge = charges.Create(new ChargeCreateOptions
             {
                 Amount = (long)Convert.ToDouble(stripePrice),
